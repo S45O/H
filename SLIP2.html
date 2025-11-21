@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Bootstrap-like Grid</title>
+  <style>
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1140px; /* similar to Bootstrap container */
+      margin: 0 auto;
+      padding: 15px;
+    }
+
+    /* Row */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: -10px;
+    }
+
+    /* Columns */
+    .col {
+      flex: 1; /* take equal space */
+      padding: 10px;
+      min-width: 0; /* fix flex overflow issue */
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Example colors */
+    .col1 { background: #007bff; } /* blue */
+    .col2 { background: #28a745; } /* green */
+    .col3 { background: #dc3545; } /* red */
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col col1">Column 1</div>
+    <div class="col col2">Column 2</div>
+    <div class="col col3">Column 3</div>
+  </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Transformations on Image</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="image-container">
+    <img id="myImage" src="icecream.jpg" alt="Sample Image">
+  </div>
+
+  <div class="controls">
+    <button onclick="rotateImage()">Rotate</button>
+    <button onclick="scaleUp()">Scale Up</button>
+    <button onclick="scaleDown()">Scale Down</button>
+    <button onclick="translateLeft()">Move Left</button>
+    <button onclick="translateRight()">Move Right</button>
+    <button onclick="translateUp()">Move Up</button>
+    <button onclick="translateDown()">Move Down</button>
+    <button onclick="resetTransform()">Reset</button>
+  </div>
+
+  <script>
+    let rotation = 0;
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+
+    function updateTransform() {
+      const img = document.getElementById("myImage");
+      img.style.transform = 
+        `rotate(${rotation}deg) scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+    }
+
+    function rotateImage() {
+      rotation += 45;
+      updateTransform();
+    }
+
+    function scaleUp() {
+      scale += 0.2;
+      updateTransform();
+    }
+
+    function scaleDown() {
+      if (scale > 0.2) scale -= 0.2;
+      updateTransform();
+    }
+
+    function translateLeft() {
+      translateX -= 20;
+      updateTransform();
+    }
+
+    function translateRight() {
+      translateX += 20;
+      updateTransform();
+    }
+
+    function translateUp() {
+      translateY -= 20;
+      updateTransform();
+    }
+
+    function translateDown() {
+      translateY += 20;
+      updateTransform();
+    }
+
+    function resetTransform() {
+      rotation = 0;
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar Input Example</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 28px;
+      text-decoration: underline;
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    label {
+      display: inline-block;
+      width: 150px;
+      margin-bottom: 10px;
+    }
+    input {
+      padding: 4px;
+      margin-bottom: 8px;
+    }
+    input[type="submit"] {
+      display: block;
+      margin: 15px auto;
+      padding: 5px 15px;
+      font-size: 16px;
+      background-color: #ddd;
+      border: 1px solid #333;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Input Types Examples</h1>
+
+  <form>
+    <label for="date">Date:</label>
+    <input type="date" id="date"><br>
+
+    <label for="datetime">Datetime:</label>
+    <input type="datetime" id="datetime"><br>
+
+    <label for="datetime-local">Datetime-local:</label>
+    <input type="datetime-local" id="datetime-local"><br>
+
+    <label for="month">Month:</label>
+    <input type="month" id="month"><br>
+
+    <label for="time">Time:</label>
+    <input type="time" id="time"><br>
+
+    <label for="week">Week:</label>
+    <input type="week" id="week"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>

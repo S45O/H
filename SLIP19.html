@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Progress Bar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .progress-container {
+      width: 80%;
+      max-width: 400px;
+      height: 30px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-top: 20px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #4caf50;
+      text-align: center;
+      color: white;
+      line-height: 30px;
+      font-weight: bold;
+      transition: width 0.5s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Download Progress</h2>
+  <button onclick="startDownload()">Start Download</button>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
+  </div>
+
+  <script>
+    function startDownload() {
+      let progress = 0;
+      let colorIndex = 0;
+      const colors = ["#4caf50", "#ff9800", "#2196f3", "#f44336"]; // green, orange, blue, red
+      const progressBar = document.getElementById("progressBar");
+
+      progressBar.style.width = "0%";
+      progressBar.textContent = "0%";
+      progressBar.style.backgroundColor = colors[colorIndex];
+
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + "%";
+        progressBar.textContent = progress + "%";
+
+        // Change color every 3 seconds
+        if (progress % 30 === 0) {
+          colorIndex = (colorIndex + 1) % colors.length;
+          progressBar.style.backgroundColor = colors[colorIndex];
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressBar.textContent = "Download Complete!";
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>

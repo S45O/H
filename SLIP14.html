@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Booking Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f8fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      background-color: #004aad;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+
+    form {
+      width: 480px;
+      margin: 25px auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      height: 70px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    input[type="reset"] {
+      background-color: #888;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #007bff;
+    }
+
+    input[type="reset"]:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Travel Plan Booking Form</h2>
+
+  <form action="#" method="post">
+    <!-- Customer Name -->
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+    <!-- Address -->
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+
+    <!-- Contact -->
+    <label for="contact">Contact No.:</label>
+    <input type="tel" id="contact" name="contact" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+
+    <!-- Gender -->
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="Male"> <label for="male" style="display:inline;">Male</label>
+    <input type="radio" id="female" name="gender" value="Female"> <label for="female" style="display:inline;">Female</label>
+    <input type="radio" id="other" name="gender" value="Other"> <label for="other" style="display:inline;">Other</label>
+
+    <!-- Preferred Season -->
+    <label>Preferred Season:</label>
+    <input type="checkbox" id="summer" name="season" value="Summer"> Summer
+    <input type="checkbox" id="winter" name="season" value="Winter"> Winter
+    <input type="checkbox" id="rainy" name="season" value="Rainy"> Rainy
+
+    <!-- Location Type -->
+    <label for="location">Location Type:</label>
+    <select id="location" name="location" required>
+      <option value="">-- Select a location type --</option>
+      <option value="Hill Station">Hill Station</option>
+      <option value="Beach">Beach</option>
+      <option value="Desert">Desert</option>
+      <option value="Historical Place">Historical Place</option>
+      <option value="Adventure Trip">Adventure Trip</option>
+    </select>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset">
+    </div>
+  </form>
+
+</body>
+</html>

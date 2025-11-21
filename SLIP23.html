@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Tiles and Rotation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    /* Container for tiled image */
+    .tiled-background {
+      width: 400px;
+      height: 300px;
+      margin: 20px auto;
+      border: 4px solid #444;
+      background-image: url('https://via.placeholder.com/150');
+      background-repeat: repeat;
+      background-size: 150px 150px;
+    }
+
+    /* Image rotation section */
+    .rotation-container {
+      margin-top: 30px;
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      transition: transform 1s ease;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Image Display with Tiles and Rotation</h2>
+
+  <!-- a. Display image in tiles -->
+  <div class="tiled-background"></div>
+
+  <!-- b. Rotate image -->
+  <div class="rotation-container">
+    <img id="rotateImage" src="https://via.placeholder.com/200" alt="Sample Image">
+    <br>
+    <button onclick="rotateClockwise()">Rotate Clockwise</button>
+    <button onclick="rotateAnticlockwise()">Rotate Anticlockwise</button>
+  </div>
+
+  <script>
+    let angle = 0;
+    const image = document.getElementById('rotateImage');
+
+    function rotateClockwise() {
+      angle += 45;
+      image.style.transform = `rotate(${angle}deg)`;
+    }
+
+    function rotateAnticlockwise() {
+      angle -= 45;
+      image.style.transform = `rotate(${angle}deg)`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #004aad;
+      padding-top: 20px;
+    }
+
+    form {
+      width: 450px;
+      margin: 25px auto;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 12px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    input[type="reset"] {
+      background-color: #888;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #007bff;
+    }
+
+    input[type="reset"]:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Customer Registration Form</h2>
+
+  <form action="#" method="post">
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+    <label for="contact">Contact No:</label>
+    <input type="tel" id="contact" name="contact" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="Male">
+    <label for="male" style="display:inline;">Male</label>
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female" style="display:inline;">Female</label>
+    <input type="radio" id="other" name="gender" value="Other">
+    <label for="other" style="display:inline;">Other</label>
+
+    <label>Preferred Days of Purchasing:</label>
+    <input type="checkbox" id="mon" name="days" value="Monday"> Monday
+    <input type="checkbox" id="fri" name="days" value="Friday"> Friday
+    <input type="checkbox" id="sun" name="days" value="Sunday"> Sunday
+
+    <label for="item">Favorite Item:</label>
+    <select id="item" name="item">
+      <option value="">-- Select an item --</option>
+      <option value="Groceries">Groceries</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Cosmetics">Cosmetics</option>
+      <option value="Home Decor">Home Decor</option>
+    </select>
+
+    <label for="suggestions">Suggestions:</label>
+    <textarea id="suggestions" name="suggestions" placeholder="Write your suggestions here..."></textarea>
+
+    <div class="buttons">
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset">
+    </div>
+  </form>
+
+</body>
+</html>

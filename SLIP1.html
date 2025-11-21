@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Management Form</title>
+  <style>
+    
+    form {
+      width: 460px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: yellow; 
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: inline-block;
+      width: 103px;
+      font-weight: bold;
+      margin: 6px 0;
+    }
+    input, select, textarea {
+      padding: 5px;
+      margin: 6px 0;
+      width: 200px;
+    }
+    .radio-group {
+      display: flex;
+      width: 200px;
+      margin-left: 100px;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .btn-submit {
+      background-color: green;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 3px;
+    }
+    .btn-clear {
+      background-color: blueviolet;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="font-weight: 600; text-align: center;"> Project Management</h2>
+  <form>
+    <label for="pname">Project Name</label>
+    <input type="text" id="pname" name="pname" placeholder="project name"><br>
+
+    <label for="assigned">Assigned to</label>
+    <select id="assigned" name="assigned">
+      <option value="er-merry">Er Merry Petision</option>
+      <option value="er-john">Er John Smith</option>
+      <option value="er-ana">Er Ana Watson</option>
+    </select><br>
+
+    <label for="sdate">Start Date</label>
+    <input type="date" id="sdate" name="sdate"><br>
+
+    <label for="edate">End Date</label>
+    <input type="date" id="edate" name="edate"><br>
+
+    <label style="display: flex; margin-top: 20px;">Priority</label>
+    <div class="radio-group">
+      <input type="radio" name="priority" value="high"> High
+      <input type="radio" name="priority" value="average"> Average
+      <input type="radio" name="priority" value="low"> Low
+    </div><br>
+
+    <label for="desc">Description</label>
+    <textarea id="desc" name="desc" rows="2"></textarea><br>
+
+    <div class="buttons">
+      <input type="submit" class="btn-submit" value="Submit">
+      <input type="reset" class="btn-clear" value="Clear">
+    </div>
+  </form>
+</body>
+</html>
+

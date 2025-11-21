@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple 3D Hover Text</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      font-family: Arial, sans-serif;
+    }
+
+    .text3d {
+      font-size: 80px;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .text3d:hover {
+      transform: translateY(-10px);
+      text-shadow: 3px 3px 0 #ff3d3d,
+                   6px 6px 0 #ff8c3d,
+                   9px 9px 0 #ffc13d;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text3d">3D TEXT</div>
+
+</body>
+</html>
