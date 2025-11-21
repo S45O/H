@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Thumbnails Gallery</title>
+  <!-- Bootstrap CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  >
+</head>
+<body class="bg-light">
+
+  <div class="container my-5">
+    <h2 class="text-center text-primary mb-4">Image Thumbnails Gallery</h2>
+
+    <div class="row g-4">
+      <!-- Thumbnail 1 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top img-thumbnail" alt="Thumbnail 1">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 1</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnail 2 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top img-thumbnail" alt="Thumbnail 2">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 2</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnail 3 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top img-thumbnail" alt="Thumbnail 3">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 3</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnail 4 -->
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top img-thumbnail" alt="Thumbnail 4">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 4</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+</body>
+</html>
+
+slip 3_2
+
+Here are five sample documents for the Employees collection.
+[
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a54c1"), "name": "Alice", "salary": 75000, "department": { "name":
+"Sales", "employees_count": 10 } },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a54c2"), "name": "Bob", "salary": 80000, "department": { "name":
+"Marketing", "employees_count": 8 } },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a54c3"), "name": "Charlie", "salary": 95000, "department": { "name":
+"Sales", "employees_count": 10 } },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a54c4"), "name": "David", "salary": 65000, "department": { "name":
+"HR", "employees_count": 5 } },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a54c5"), "name": "Eve", "salary": 55000, "department": { "name":
+"Sales", "employees_count": 10 } }
+]
+
+a. Display name of the employee who has the highest salary.
+db.Employees.find(
+{},
+{ _id: 0, name: 1, salary: 1 }
+).sort({ salary: -1 }).limit(1)
+
+b. Display the department with the maximum number of employees.
+db.Employees.aggregate([
+{
+$group: {
+_id: "$department.name",
+total_employees: { $sum: 1 }
+}
+},
+{
+$sort: { total_employees: -1 }
+},
+{
+$limit: 1
+}
+])
+
+c. Write a cursor which shows department-wise employee information.
+db.Employees.aggregate([
+{
+$group: {
+_id: "$department.name",
+employees: {
+$push: {
+name: "$name",
+salary: "$salary"
+}
+}
+}
+}
+])
+
+d. List all the employees who work in the Sales department and have a salary greater than 50000.
+db.Employees.find(
+{ "department.name": "Sales", salary: { $gt: 50000 } },
+{ _id: 0, name: 1, salary: 1 }
+)

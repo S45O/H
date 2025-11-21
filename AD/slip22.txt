@@ -1,0 +1,138 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Text Effects</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #232342);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 80px;
+      color: #fff;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      /* 3D Text Shadow Effect */
+      text-shadow:
+        1px 1px 0 #ccc,
+        2px 2px 0 #bbb,
+        3px 3px 0 #aaa,
+        4px 4px 0 #999,
+        5px 5px 0 #888,
+        6px 6px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .text-box {
+      width: 300px;
+      border: 2px solid #00ffcc;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      text-align: left;
+
+      /* Word wrap & overflow handling */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wordwrap-box {
+      width: 300px;
+      border: 2px solid #ff66ff;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      word-wrap: break-word;
+    }
+
+    p {
+      margin-top: 40px;
+      font-style: italic;
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>3D Text</h1>
+
+  <div class="text-box">
+    This is a long line of text that will show text-overflow using ellipsis effect if it’s too long.
+  </div>
+
+  <div class="wordwrap-box">
+    ThisIsAReallyLongWordThatWillBreakIntoTheNextLineToShowWordWrapEffect.
+  </div>
+
+  <p>Created using HTML and CSS Text Effects</p>
+
+</body>
+</html>
+
+Q 2)
+
+ CREATE
+ // Car models
+(honda:CarModel {name: "Honda City"}),
+ (skoda:CarModel {name: "Skoda"}),
+ (creta:CarModel {name: "Creta"}),
+ (swift:CarModel {name: "Swift"}),
+ (ertiga:CarModel {name: "Ertiga"}),
+ // Sections
+ (section1:Section {name: "Section 1"}),
+ (section2:Section {name: "Section 2"}),
+ (section3:Section {name: "Section 3"}),
+ // Sales staff
+ (narayan:SalesStaff {name: "Mr. Narayan"}),
+ (ravi:SalesStaff {name: "Mr. Ravi"}),
+ // Customers
+ (customer1:Customer {name: "Amit"}),
+ (customer2:Customer {name: "Priya"}),
+ (customer3:Customer {name: "Rahul"}),
+ // Relationships
+ (section1)-[:CONTAINS]->(honda),
+ (section1)-[:CONTAINS]->(swift),
+ (section2)-[:CONTAINS]->(skoda),
+ (section3)-[:CONTAINS]->(creta),
+ (section3)-[:CONTAINS]->(ertiga),
+ (narayan)-[:HANDLES]->(section1),
+ (ravi)-[:HANDLES]->(section2),
+ (customer1)-[:MAKES]->(enquiry1:Enquiry {query: "Inquiry about Honda City"}),
+ (customer2)-[:MAKES]->(enquiry2:Enquiry {query: "Inquiry about Creta"}),
+ (customer3)-[:MAKES]->(enquiry3:Enquiry {query: "Inquiry about Skoda"}),
+ // Purchases
+ (customer1)-[:PURCHASED]->(honda),
+ (customer2)-[:PURCHASED]->(creta);
+s
+ a. List the types of cars available in the showroom.
+ MATCH(car:CarModel)
+ RETURNcar.name;
+ b. List the sections handled by Mr. Narayan.
+ MATCH(narayan:SalesStaff {name: "Mr. Narayan"})-[:HANDLES]->(section:Section)
+ RETURNsection.name;
+ c. List the names of customers who have done only enquiry but not made any purchase.
+ MATCH(customer:Customer)
+ WHERENOT(customer)-[:PURCHASED]->(:CarModel)
+ RETURNcustomer.name;
+ d. List the highly sold car model.
+ MATCH(customer:Customer)-[:PURCHASED]->(car:CarModel)
+ RETURNcar.name, COUNT(customer) AS sales
+ ORDERBYsales DESC
+ LIMIT 1;

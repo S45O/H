@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Bootstrap-like Grid</title>
+  <style>
+    .container {
+      width: 100%;
+      max-width: 1140px; 
+      margin: 0 auto;
+      padding: 15px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: -10px;
+    }
+    .col {
+      flex: 1; 
+      padding: 10px;
+      min-width: 0;  
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+ 
+    .col1 { background: #007bff; } 
+    .col2 { background: #28a745; } 
+    .col3 { background: #dc3545; } 
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col col1">Column 1</div>
+    <div class="col col2">Column 2</div>
+    <div class="col col3">Column 3</div>
+  </div>
+</div>
+
+</body>
+</html>
+
+slip 2_2
+Here are five sample documents for the Newspapers collection.
+[
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a53b1"), "title": "Daily Nashik Times", "language": "Marathi",
+"publisher": { "name": "ABC Publications", "state": "Maharashtra" }, "city": "Nashik", "sales": 50000 },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a53b2"), "title": "Mumbai Mirror", "language": "English",
+"publisher": { "name": "XYZ Media", "state": "Maharashtra" }, "city": "Mumbai", "sales": 120000 },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a53b3"), "title": "Ahmedabad Chronicle", "language": "Gujarati",
+"publisher": { "name": "PQR Publishers", "state": "Gujarat" }, "city": "Ahmedabad", "sales": 30000 },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a53b4"), "title": "Pune Daily", "language": "Marathi",
+"publisher": { "name": "LMN Media", "state": "Maharashtra" }, "city": "Pune", "sales": 80000 },
+{ "_id": ObjectId("64c9a1b1f6291e7d5c7a53b5"), "title": "Surat News", "language": "Gujarati",
+"publisher": { "name": "DEF Publications", "state": "Gujarat" }, "city": "Surat", "sales": 45000 }
+]
+
+a. List all newspapers available in “NASHIK” city.
+db.Newspapers.find(
+{ city: "Nashik" },
+{ _id: 0, title: 1 }
+)
+
+b. List all the newspapers of “Marathi” language.
+db.Newspapers.find(
+{ language: "Marathi" },
+{ _id: 0, title: 1 }
+)
+
+c. Count the number of publishers from the “Gujarat” state.
+db.Newspapers.distinct(
+"publisher.name",
+{ "publisher.state": "Gujarat" }
+).length
+
+d. Write a cursor to show newspapers with the highest sale in Maharashtra State.
+db.Newspapers.find(
+{ "publisher.state": "Maharashtra" },
+{ _id: 0, title: 1, sales: 1 }
+).sort({ sales: -1 }).limit(1)

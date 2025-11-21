@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transition Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f5fa;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #004aad;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .box {
+      width: 120px;
+      height: 120px;
+      background-color: #007bff;
+      border-radius: 10px;
+      display: inline-block;
+      transition-property: background-color, transform, width, height;
+      transition-duration: 1s;
+      transition-timing-function: ease-in-out;
+      transition-delay: 0s;
+    }
+
+    /* Different delays and durations for each box */
+    .box:nth-child(2) {
+      transition-duration: 2s;
+      transition-delay: 0.5s;
+      background-color: #28a745;
+    }
+
+    .box:nth-child(3) {
+      transition-duration: 3s;
+      transition-delay: 1s;
+      background-color: #ffc107;
+    }
+
+    /* Hover effect: color, size, and rotation */
+    .box:hover {
+      background-color: #ff4757;
+      transform: rotate(360deg) scale(1.2);
+      width: 150px;
+      height: 150px;
+    }
+
+    p {
+      margin-top: 30px;
+      color: #444;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Transition, Duration, and Delay Example</h2>
+  <div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+
+  <p>Hover over the boxes to see transition effects with different durations and delays.</p>
+</body>
+</html>
+
+slip 10_2
+
+============================================================
+SLIP10
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58e1"),
+"product_name": "Smartphone X",
+"brand_name": "TechBrand",
+"warranty_period": 1,
+"rating": 4.5,
+"customer_name": "Alice Johnson",
+"purchase_date": ISODate("2023-08-15T00:00:00Z"),
+"city": "Nashik",
+"bill_amount": 70000
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58e2"),
+"product_name": "Laptop Pro",
+"brand_name": "CompuTech",
+"warranty_period": 2,
+"rating": 4.7,
+"customer_name": "Bob Smith",
+"purchase_date": ISODate("2023-08-16T00:00:00Z"),
+"city": "Nashik",
+"bill_amount": 120000
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58e3"),
+"product_name": "Bluetooth Headphones",
+"brand_name": "SoundWave",
+"warranty_period": 1,
+"rating": 4.2,
+"customer_name": "Charlie Brown",
+"purchase_date": ISODate("2023-08-15T00:00:00Z"),
+"city": "Pune",
+"bill_amount": 5000
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58e4"),
+"product_name": "Smartwatch 3",
+"brand_name": "WearTech",
+"warranty_period": 1,
+"rating": 4.8,
+"customer_name": "David Wilson",
+"purchase_date": ISODate("2023-08-17T00:00:00Z"),
+"city": "Nashik",
+"bill_amount": 15000
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58e5"),
+"product_name": "Tablet Mini",
+"brand_name": "Gizmos",
+"warranty_period": 1,
+"rating": 4.0,
+"customer_name": "Emma Davis",
+"purchase_date": ISODate("2023-08-18T00:00:00Z"),
+"city": "Mumbai",
+"bill_amount": 25000
+}
+]
+
+3. Queries
+a. List the names of products whose warranty period is one year.
+db.OnlineShopping.find(
+{ warranty_period: 1 },
+{ _id: 0, product_name: 1 }
+)
+
+b. List the customers who have made a purchase on “15/08/2023”.
+db.OnlineShopping.find(
+{ purchase_date: ISODate("2023-08-15T00:00:00Z") },
+{ _id: 0, customer_name: 1 }
+)
+
+c. Display the names of products with the brand which has the highest rating.
+db.OnlineShopping.aggregate([
+{
+$group: {
+_id: "$brand_name",
+max_rating: { $max: "$rating" }
+}
+},
+{
+$lookup: {
+from: "OnlineShopping",
+localField: "max_rating",
+foreignField: "rating",
+as: "product_details"
+}
+},
+{
+$unwind: "$product_details"
+},
+{
+$project: {
+_id: 0,
+product_name: "$product_details.product_name",
+brand_name: "$product_details.brand_name",
+rating: "$product_details.rating"
+}
+}
+])
+
+d. Display customers who stay in a specific city (e.g., "Nashik") and have a bill amount greater than 50000.
+db.OnlineShopping.find(
+{ city: "Nashik", bill_amount: { $gt: 50000 } },
+{ _id: 0, customer_name: 1 }
+)

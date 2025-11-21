@@ -1,0 +1,130 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Tiles and Rotation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    /* Container for tiled image */
+    .tiled-background {
+      width: 400px;
+      height: 300px;
+      margin: 20px auto;
+      border: 4px solid #444;
+      background-image: url('https://via.placeholder.com/150');
+      background-repeat: repeat;
+      background-size: 150px 150px;
+    }
+
+    /* Image rotation section */
+    .rotation-container {
+      margin-top: 30px;
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      transition: transform 1s ease;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Image Display with Tiles and Rotation</h2>
+
+  <!-- a. Display image in tiles -->
+  <div class="tiled-background"></div>
+
+  <!-- b. Rotate image -->
+  <div class="rotation-container">
+    <img id="rotateImage" src="https://via.placeholder.com/200" alt="Sample Image">
+    <br>
+    <button onclick="rotateClockwise()">Rotate Clockwise</button>
+    <button onclick="rotateAnticlockwise()">Rotate Anticlockwise</button>
+  </div>
+
+  <script>
+    let angle = 0;
+    const image = document.getElementById('rotateImage');
+
+    function rotateClockwise() {
+      angle += 45;
+      image.style.transform = rotate(${angle}deg);
+    }
+
+    function rotateAnticlockwise() {
+      angle -= 45;
+      image.style.transform = rotate(${angle}deg);
+    }
+  </script>
+
+</body>
+</html>
+
+Q 2)
+
+CREATE
+// Vehicle types
+ (tw:VehicleType {name: "Two-Wheeler", characteristics: "Lightweight, Fuel-efficient, Easy to park"}),
+ (fw:VehicleType {name: "Four-Wheeler", characteristics: "More space, Comfortable, Safer"}),
+ // Customers
+ (cust1:Customer {name: "Amit"}),
+ (cust2:Customer {name: "Priya"}),
+ (cust3:Customer {name: "Rahul"}),
+ (cust4:Customer {name: "Sneha"}),
+ // Recommendations
+ (cust1)-[:BUYS]->(tw),
+ (cust2)-[:BUYS]->(fw),
+ (cust3)-[:BUYS]->(tw),
+ (cust3)-[:BUYS]->(fw),
+ (cust4)-[:BUYS]->(tw),
+ (cust1)-[:RECOMMENDS {rating: 5}]->(tw),
+ (cust2)-[:RECOMMENDS {rating: 4}]->(fw),
+ (cust3)-[:RECOMMENDS {rating: 5}]->(tw),
+ (cust4)-[:RECOMMENDS {rating: 5}]->(fw);
+
+ a. List the characteristics of four-wheeler types.
+ MATCH(fw:VehicleType {name: "Four-Wheeler"})
+ RETURNfw.characteristics;
+ b. List the names of customers who bought a two-wheeler vehicle.
+ MATCH(cust:Customer)-[:BUYS]->(tw:VehicleType {name: "Two-Wheeler"})
+ RETURNcust.name;
+ c. List the customers who bought more than one type of vehicle.
+ MATCH(cust:Customer)-[:BUYS]->(v:VehicleType)
+ WITH cust, COUNT(v) AS vehicleCount
+ WHEREvehicleCount > 1
+ RETURNcust.name;
+ d. List the most recommended vehicle type.
+ MATCH(cust:Customer)-[:RECOMMENDS]->(v:VehicleType)
+ RETURNv.name, COUNT(cust) AS recommendationCount
+ ORDERBYrecommendationCount DESC
+ LIMIT 1;

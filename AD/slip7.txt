@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Text Hover Effect</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #141E30, #243B55);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 80px;
+    color: #fff;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    text-shadow: none;
+  }
+
+  h1:hover {
+    color: #00ffff;
+    transform: translateY(-10px);
+    text-shadow: 
+      1px 1px 0 #00b3b3,
+      2px 2px 0 #00a1a1,
+      3px 3px 0 #009090,
+      4px 4px 0 #007f7f,
+      5px 5px 15px rgba(0, 255, 255, 0.5);
+  }
+</style>
+</head>
+<body>
+
+  <h1>3D TEXT EFFECT</h1>
+
+</body>
+</html>
+
+
+
+
+
+slip 7_2
+
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a51a1"),
+"first_name": "Sam",
+"last_name": "Smith",
+"address": "123 Elm St",
+"contact": "1234567890",
+"accounts": [
+{
+"account_number": "ACC123",
+"account_type": "Saving",
+"branch": "Main Branch",
+"opened_on": ISODate("2020-01-01")
+}
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a51a2"),
+"first_name": "Sarah",
+"last_name": "Johnson",
+"address": "456 Oak St",
+"contact": "0987654321",
+"accounts": [
+{
+"account_number": "ACC124",
+"account_type": "Checking",
+"branch": "Main Branch",
+"opened_on": ISODate("2020-01-01")
+}
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a51a3"),
+"first_name": "Mike",
+"last_name": "Brown",
+"address": "789 Pine St",
+"contact": "1231231231",
+"accounts": [
+{
+"account_number": "ACC125",
+"account_type": "Saving",
+"branch": "West Branch",
+"opened_on": ISODate("2021-02-15")
+}
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a51a4"),
+"first_name": "Sally",
+"last_name": "Green",
+"address": "101 Maple St",
+"contact": "9879879879",
+"accounts": [
+{
+"account_number": "ACC126",
+"account_type": "Loan",
+"branch": "East Branch",
+"opened_on": ISODate("2019-11-30")
+}
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a51a5"),
+"first_name": "John",
+"last_name": "Doe",
+"address": "202 Birch St",
+"contact": "4564564564",
+"accounts": [
+{
+"account_number": "ACC127",
+"account_type": "Saving",
+"branch": "Main Branch",
+"opened_on": ISODate("2020-01-01")
+}
+]
+}
+]
+
+a. List names of all customers whose first name starts with a “S”.
+db.Customers.find(
+{ first_name: { $regex: '^S', $options: 'i' } },
+{ _id: 0, first_name: 1, last_name: 1 }
+)
+
+b. List all customers who opened an account on 1/1/2020 in a specific branch (e.g., "Main Branch").
+db.Customers.find(
+{
+"accounts": {
+$elemMatch: {
+opened_on: ISODate("2020-01-01"),
+branch: "Main Branch"
+}
+}
+},
+{ _id: 0, first_name: 1, last_name: 1 }
+)
+
+c. List the names of customers where account_type = "Saving".
+db.Customers.find(
+{ "accounts.account_type": "Saving" },
+{ _id: 0, first_name: 1, last_name: 1 }
+)
+
+d. Count total number of loan account holders in a specific branch (e.g., "East Branch").
+db.Customers.find({
+"accounts": {
+$elemMatch: {
+branch: "East Branch",
+account_type: "Loan"
+}
+}
+}).count();

@@ -1,0 +1,151 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Contact Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    .contact-container {
+      background-color: #1e2340;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .contact-info {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .contact-info i {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .contact-info h4 {
+      margin-bottom: 10px;
+    }
+
+    .contact-form {
+      background-color: #fff;
+      padding: 40px;
+    }
+
+    .btn-submit {
+      background-color: #1e2340;
+      color: #fff;
+      width: 100px;
+      border: none;
+    }
+
+    .btn-submit:hover {
+      background-color: #343a6a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-container">
+    <div class="row g-0">
+      <!-- Left Side -->
+      <div class="col-md-4 contact-info d-flex flex-column justify-content-center align-items-center">
+        <i class="bi bi-envelope-fill"></i>
+        <h4>Contact Us</h4>
+        <p>We would love to hear from you!</p>
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-8 contact-form">
+        <form>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="fname" class="form-label">First Name:</label>
+              <input type="text" id="fname" class="form-control" placeholder="Enter First Name" required>
+            </div>
+            <div class="col">
+              <label for="lname" class="form-label">Last Name:</label>
+              <input type="text" id="lname" class="form-control" placeholder="Enter Last Name" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment:</label>
+            <textarea id="comment" class="form-control" rows="4" placeholder="Enter your comment"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons and JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+Q 2)
+
+ CREATE
+ (c1:Customer {name: "Sarah", age: 28, gender: "Female", location: "Pune"}),
+ (c2:Customer {name: "Sam", age: 25, gender: "Male", location: "Mumbai"}),
+ (c3:Customer {name: "Raj", age: 30, gender: "Male", location: "Pune"}),
+ (c4:Customer {name: "Shreya", age: 22, gender: "Female", location: "Delhi"}),
+ (r1:Restaurant {name: "Pizza Hut", type_of_food: "Italian", location: "Pune", rating: 4.5}),
+ (r2:Restaurant {name: "McDonald's", type_of_food: "Fast Food", location: "Mumbai", rating: 3.8}),
+ (r3:Restaurant {name: "The Bombay Canteen", type_of_food: "Indian", location: "Mumbai", rating: 4.2}),
+ (f1:FoodService {name: "Zomato"}),
+ (f2:FoodService {name: "Swiggy"}),
+ (c1)-[:ORDERED_FROM {date: "2023-01-01", amount: 500}]->(r1),
+ (c2)-[:ORDERED_FROM {date: "2023-01-01", amount: 300}]->(r2),
+ (c3)-[:ORDERED_FROM {date: "2023-01-01", amount: 600}]->(r3),
+ (r1)-[:PARTNERED_WITH]->(f1),
+ (r2)-[:PARTNERED_WITH]->(f2),
+ (r3)-[:PARTNERED_WITH]->(f2),
+ (c1)-[:RATED {rating: 5}]->(f1),
+ (c2)-[:RATED {rating: 4}]->(f2),
+ (c1)-[:RECOMMENDED {recommendation_date: "2023-01-02"}]->(c2),
+ (c2)-[:RECOMMENDED {recommendation_date: "2023-01-02"}]->(c3),
+ (c4)-[:RECOMMENDED {recommendation_date: "2023-01-03"}]->(c1);
+
+ a. Count no. of customers who placed an order on "1/1/2023".
+ MATCH(c:Customer)-[o:ORDERED_FROM]->(r:Restaurant)
+ WHEREo.date = "2023-01-01"
+ RETURNCOUNT(c) AS num_customers;
+b. List the names of customers whose name starts with 'S' and placed an order using Swiggy.
+ MATCH(c:Customer)-[:ORDERED_FROM]->(r:Restaurant)-[:PARTNERED_WITH]->(f:FoodService {name:
+ "Swiggy"})
+ WHEREc.name STARTS WITH "S"
+ RETURNc.name;
+ c. List the names of hotels with a high rating (>=4).
+ MATCH(r:Restaurant)
+ WHEREr.rating >= 4
+ RETURNr.name, r.rating;
+ d. List the most recommended hotels in a specific area (e.g., "Pune").
+ MATCH(c:Customer)-[:ORDERED_FROM]->(r:Restaurant)
+ WHEREr.location = "Pune"
+ WITH r, COUNT(c) AS recommendations
+ RETURNr.name, recommendations
+ ORDERBYrecommendations DESC
+ LIMIT 1;

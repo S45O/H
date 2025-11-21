@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Buttons</title>
+  <!-- Include Bootstrap CSS (from CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+</head>
+<body class="p-4">
+
+  <h2>Bootstrap Styled Buttons</h2>
+
+  <!-- Buttons -->
+  <button type="button" class="btn btn-primary">Primary</button>
+  <button type="button" class="btn btn-secondary">Secondary</button>
+  <button type="button" class="btn btn-success">Success</button>
+  <button type="button" class="btn btn-danger">Danger</button>
+  <button type="button" class="btn btn-warning">Warning</button>
+  <button type="button" class="btn btn-info">Info</button>
+  <button type="button" class="btn btn-light">Light</button>
+  <button type="button" class="btn btn-dark">Dark</button>
+
+  <!-- Optionally: Outline Versions -->
+  <div class="mt-4">
+    <h4>Outline Buttons</h4>
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+  </div>
+
+  <!-- Include Bootstrap JS (optional for some interactive components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+slip 8_2
+
+=================================================================================
+SLIP 8:
+Here are five sample documents for the Inventory collection.
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58c1"),
+"item_name": "Planner",
+"tags": ["office", "stationery"],
+"quantity": 400,
+"status": "A",
+"height": 10,
+"warehouses": [
+{ "warehouse_name": "Warehouse A", "stock_quantity": 15 },
+{ "warehouse_name": "Warehouse B", "stock_quantity": 25 }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58c2"),
+"item_name": "Notebook",
+"tags": ["office", "stationery", "education"],
+"quantity": 200,
+"status": "B",
+"height": 8,
+"warehouses": [
+{ "warehouse_name": "Warehouse A", "stock_quantity": 10 },
+{ "warehouse_name": "Warehouse C", "stock_quantity": 30 }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58c3"),
+"item_name": "Desk Lamp",
+"tags": ["office", "furniture"],
+"quantity": 50,
+"status": "A",
+"height": 12,
+"warehouses": [
+{ "warehouse_name": "Warehouse B", "stock_quantity": 5 },
+{ "warehouse_name": "Warehouse C", "stock_quantity": 15 }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58c4"),
+"item_name": "Chair",
+"tags": ["furniture", "office"],
+"quantity": 100,
+"status": "C",
+"height": 18,
+"warehouses": [
+{ "warehouse_name": "Warehouse A", "stock_quantity": 50 },
+{ "warehouse_name": "Warehouse C", "stock_quantity": 50 }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58c5"),
+"item_name": "Table",
+"tags": ["furniture", "office"],
+"quantity": 300,
+"status": "B",
+"height": 30,
+"warehouses": [
+{ "warehouse_name": "Warehouse A", "stock_quantity": 20 },
+{ "warehouse_name": "Warehouse B", "stock_quantity": 50 }
+]
+}
+]
+
+3. Queries
+a. List all the items where quantity is greater than 300.
+db.Inventory.find(
+{ quantity: { $gt: 300 } },
+{ _id: 0, item_name: 1, quantity: 1 }
+)
+
+b. List all items which have tags less than 5.
+db.Inventory.find(
+{ "tags.4": { $exists: false } },
+{ _id: 0, item_name: 1, tags: 1 }
+)
+
+c. List all items having status equal to "B" or having quantity less than 50 and height of the product should be
+greater than 8.
+db.Inventory.find(
+{
+$or: [
+{ status: "B" },
+{ $and: [ { quantity: { $lt: 50 } }, { height: { $gt: 8 } } ] }
+]
+},
+{ _id: 0, item_name: 1, status: 1, quantity: 1, height: 1 }
+)
+
+d. Find all warehouses that keep item “Planner” and have stock quantity less than 20.
+db.Inventory.find(
+{
+item_name: "Planner",
+"warehouses.stock_quantity": { $lt: 20 }
+},
+{ _id: 0, "warehouses.$": 1 }
+)

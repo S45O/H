@@ -1,0 +1,77 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2D Transform Image</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 50px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+ .image-container {
+        display: inline-block;
+        transition: all 0.5s ease;
+        transform: rotate(10deg) scale(1.2) translate(20px, 20px);
+        }
+img {
+        max-width: 300px;
+        border: 5px solid #333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>2D Transformed Image</h2>
+<div class="image-container">
+      <img src="https://via.placeholder.com/300" alt="Sample Image" />
+    </div>
+  </body>
+</html>
+
+Q 2)
+
+ CREATE (d1:Doctor {name: "Dr. Asha", specialization: "Pediatric", experience: 10}),
+ (d2:Doctor {name: "Dr. Vijay", specialization: "Heart Specialist", experience: 15}),
+ (d3:Doctor {name: "Dr. Ravi", specialization: "Orthopedic", experience: 12}),
+ (d4:Doctor {name: "Dr. Neha", specialization: "Gynaec", experience: 8}),
+ (h1:Hospital {name: "City Hospital", location: "Seren Meadows"}),
+ (h2:Hospital {name: "HealthCare Center", location: "Downtown"}),
+ (h3:Hospital {name: "Sunrise Hospital", location: "Seren Meadows"}),
+ (c1:Clinic {name: "Dr. Asha's Clinic", location: "Central Pune"}),
+ (c2:Clinic {name: "HeartCare Clinic", location: "North Pune"}),
+ (d1)-[:VISITS]->(h1),
+ (d2)-[:VISITS]->(h2),
+ (d3)-[:VISITS]->(h1),
+ (d4)-[:VISITS]->(h3),
+ (d1)-[:OWNS]->(c1),
+ (d2)-[:OWNS]->(c2),
+ (p1:Person {name: "John", rating: 4, feedback: "Excellent care"}),
+ (p2:Person {name: "Sophia", rating: 5, feedback: "Very professional"}),
+ (p3:Person {name: "Raj", rating: 3, feedback: "Good experience"}),
+ (p1)-[:REVIEWED {rating: 4, feedback: "Excellent care"}]->(d1),
+ (p2)-[:RECOMMENDED]->(d1),
+ (p3)-[:REVIEWED {rating: 3, feedback: "Good experience"}]->(d3);
+
+
+ a. List the Orthopedic doctors in Seren Meadows:
+ MATCH(d:Doctor {specialization: "Orthopedic"})-[:VISITS]->(h:Hospital {location: "Seren Meadows"})
+ RETURNd.name;
+ b. List the doctors who have specialization in "Heart Specialist":
+ MATCH(d:Doctor {specialization: "Heart Specialist"})
+ RETURNd.name;
+ c. List the most recommended Pediatrics in Seren Meadows:
+ MATCH(d:Doctor {specialization: "Pediatric"})-[:VISITS]->(h:Hospital {location: "Seren
+ Meadows"})<-[:RECOMMENDED]-(p:Person)
+ RETURNd.name, COUNT(p) AS recommendations
+ ORDERBYrecommendations DESC
+ LIMIT 1;
+ d. List all doctors who visit more than 2 hospitals:
+ MATCH(d:Doctor)-[:VISITS]->(h:Hospital)
+ WITH d, COUNT(h) AS hospitals_count
+ WHEREhospitals_count > 2
+ RETURNd.name, hospitals_count;

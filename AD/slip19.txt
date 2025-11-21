@@ -1,0 +1,137 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Progress Bar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .progress-container {
+      width: 80%;
+      max-width: 400px;
+      height: 30px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-top: 20px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #4caf50;
+      text-align: center;
+      color: white;
+      line-height: 30px;
+      font-weight: bold;
+      transition: width 0.5s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Download Progress</h2>
+  <button onclick="startDownload()">Start Download</button>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
+  </div>
+
+  <script>
+    function startDownload() {
+      let progress = 0;
+      let colorIndex = 0;
+      const colors = ["#4caf50", "#ff9800", "#2196f3", "#f44336"]; // green, orange, blue, red
+      const progressBar = document.getElementById("progressBar");
+
+      progressBar.style.width = "0%";
+      progressBar.textContent = "0%";
+      progressBar.style.backgroundColor = colors[colorIndex];
+
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + "%";
+        progressBar.textContent = progress + "%";
+
+        // Change color every 3 seconds
+        if (progress % 30 === 0) {
+          colorIndex = (colorIndex + 1) % colors.length;
+          progressBar.style.backgroundColor = colors[colorIndex];
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressBar.textContent = "Download Complete!";
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
+
+Q 2)
+
+ CREATE (i1:Industry {name: "Dell", location: "USA"}),
+ (i2:Industry {name: "HP", location: "USA"}),
+ (i3:Industry {name: "Lenovo", location: "China"}),
+ (l1:Laptop {model: "Inspiron", company: "Dell", price: 50000, release_year: 2022}),
+ (l2:Laptop {model: "Pavilion", company: "HP", price: 60000, release_year: 2023}),
+ (l3:Laptop {model: "ThinkPad", company: "Lenovo", price: 55000, release_year: 2022}),
+ (i1)-[:PRODUCES]->(l1),
+ (i2)-[:PRODUCES]->(l2),
+ (i3)-[:PRODUCES]->(l3),
+(c1:Customer {name: "John", purchase_date: "2023-01-26"}),
+ (c2:Customer {name: "Sara", purchase_date: "2022-12-01"}),
+ (c3:Customer {name: "Alex", purchase_date: "2023-01-26"}),
+ (c1)-[:BOUGHT {purchase_date: "2023-01-26"}]->(l1),
+ (c2)-[:BOUGHT {purchase_date: "2022-12-01"}]->(l2),
+ (c3)-[:BOUGHT {purchase_date: "2023-01-26"}]->(l3),
+ (c1)-[:RECOMMENDED]->(l1),
+ (c2)-[:RATED {rating: 4}]->(l2),
+ (c3)-[:RATED {rating: 5}]->(l1);
+
+ a. List the characteristics of laptops.
+ MATCH(l:Laptop)
+ RETURNl.model, l.company, l.price, l.release_year;
+ b. List the names of customers who bought a "DELL" company laptop.
+ MATCH(c:Customer)-[:BOUGHT]->(l:Laptop {company: "Dell"})
+ RETURNc.name;
+ c. List the customers who purchased a device on "26/01/2023".
+ MATCH(c:Customer)-[:BOUGHT {purchase_date: "2023-01-26"}]->(l:Laptop)
+ RETURNc.name, l.model;
+ d. List the most recommended device.
+ MATCH(l:Laptop)<-[:RECOMMENDED]-(c:Customer)
+ RETURNl.model, count(c) AS recommendations
+ ORDERBYrecommendations DESC
+ LIMIT 1;

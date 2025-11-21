@@ -1,0 +1,178 @@
+Q 1)
+
+html code
+!-- File: main.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Company Frame Layout</title>
+</head>
+<frameset rows="20%,*">
+  <!-- Top frame for company name -->
+  <frame src="header.html" name="header" scrolling="no" noresize>
+
+  <!-- Split remaining part into two columns -->
+  <frameset cols="25%,75%">
+    <frame src="departments.html" name="menu">
+    <frame src="welcome.html" name="content">
+  </frameset>
+</frameset>
+</html>
+header.html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #2b2b6e;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>ABC Technologies Pvt. Ltd.</h1>
+</body>
+</html>
+dept.html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    a {
+      display: block;
+      padding: 10px;
+      color: #003366;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      background-color: #d1e0f0;
+    }
+  </style>
+</head>
+<body>
+  <h3>Departments</h3>
+  <a href="hr.html" target="content">Human Resources</a>
+  <a href="it.html" target="content">Information Technology</a>
+  <a href="finance.html" target="content">Finance</a>
+</body>
+</html>
+welcome.html
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+  <h2>Welcome to ABC Technologies!</h2>
+  <p>Select a department from the left to view details.</p>
+</body>
+</html>
+hr.html
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; padding:20px;">
+  <h2>Human Resources Department</h2>
+  <p>The HR Department manages recruitment, employee relations, and company policies.</p>
+</body>
+</html>
+it.html
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; padding:20px;">
+  <h2>Information Technology Department</h2>
+  <p>The IT Department maintains company software, networks, and security systems.</p>
+</body>
+</html>
+finance.html
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; padding:20px;">
+  <h2>Finance Department</h2>
+  <p>The Finance Department handles budgeting, accounts, and financial planning.</p>
+</body>
+</html>
+
+
+Q 2)
+ Here are five sample documents for the Sales collection.
+ [
+ {
+ "_id": ObjectId("64c9a1b1f6291e7d5c7a58e1"),
+ "product_name": "Laptop",
+ "product_id": "P001",
+ "customer_name": "Mr. Rajiv",
+ "order_id": "O001",
+ "order_value": 25000,
+ "invoice_id": "I001",
+ "invoice_date": ISODate("2023-08-15T00:00:00Z")
+ },
+ {
+ "_id": ObjectId("64c9a1b1f6291e7d5c7a58e2"),
+ "product_name": "Smartphone",
+ "product_id": "P002",
+ "customer_name": "Ms. Priya",
+ "order_id": "O002",
+ "order_value": 15000,
+ "invoice_id": null,
+ "invoice_date": null
+ },
+ {
+ "_id": ObjectId("64c9a1b1f6291e7d5c7a58e3"),
+ "product_name": "Headphones",
+ "product_id": "P003",
+ "customer_name": "Mr. Rajiv",
+ "order_id": "O003",
+ "order_value": 5000,
+ "invoice_id": "I002",
+ "invoice_date": ISODate("2023-08-16T00:00:00Z")
+ },
+ {
+ "_id": ObjectId("64c9a1b1f6291e7d5c7a58e4"),
+ "product_name": "Tablet",
+ "product_id": "P004",
+ "customer_name": "Mrs. Anjali",
+ "order_id": "O004",
+ "order_value": 20000,
+ "invoice_id": null,
+ "invoice_date": null
+ },
+ {
+ "_id": ObjectId("64c9a1b1f6291e7d5c7a58e5"),
+ "product_name": "Smartwatch",
+ "product_id": "P005",
+ "customer_name": "Mr. Rajiv",
+ "order_id": "O005",
+ "order_value": 30000,
+ "invoice_id": "I003",
+ "invoice_date": ISODate("2023-08-17T00:00:00Z")
+ }
+]
+
+3. Queries
+ a. List all products in the inventory.
+ db.Sales.find(
+ {},
+ { _id: 0, product_name: 1, product_id: 1 }
+)
+ —--------------------------------------------------------------------------------------------------------------------------
+b. List the details of orders with a value > 20000.
+ db.Sales.find(
+ { order_value: { $gt: 20000 } },
+ { _id: 0, order_id: 1, order_value: 1, customer_name: 1 }
+ )
+ —--------------------------------------------------------------------------------------------------------------------------
+c. List all the orders which have not been processed (invoice not generated).
+ db.Sales.find(
+ { invoice_id: null },
+ { _id: 0, order_id: 1, customer_name: 1, order_value: 1 }
+ )
+ —--------------------------------------------------------------------------------------------------------------------------
+d. List all the orders along with their invoice for “Mr. Rajiv”.
+ db.Sales.find(
+ { customer_name: "Mr. Rajiv" },
+ { _id: 0, order_id: 1, product_name: 1, order_value: 1, invoice_id: 1, invoice_date: 1 }
+ )

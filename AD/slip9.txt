@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: darkblue;
+    }
+
+    .form-container {
+      height: auto;
+      width: 400px;
+      margin: auto;
+      padding: 20px;
+      background-color: lightskyblue;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      color: black;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .gender-options,
+    .subjects {
+      margin-top: 5px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: auto;
+      margin-right: 5px;
+    }
+
+    .btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: darkblue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: navy;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registration Page</h1>
+  <div class="form-container">
+    <form>
+      <!-- Name Fields -->
+      <label>First Name:</label>
+      <input type="text" name="firstname" size="15">
+
+      <label>Middle Name:</label>
+      <input type="text" name="middlename" size="15">
+
+      <label>Last Name:</label>
+      <input type="text" name="lastname" size="15">
+
+      <!-- Gender -->
+      <label>Gender:</label>
+      <div class="gender-options">
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other
+      </div>
+
+      <!-- Course -->
+      <label>Course:</label>
+      <select name="course">
+        <option value="">Select Course</option>
+        <option value="BSC">BSC Comp.Sci</option>
+        <option value="MSC">MSC Comp.Sci</option>
+        <option value="MBA">MBA</option>
+      </select>
+
+      <!-- Subjects -->
+      <label>Subjects:</label>
+      <div class="subjects">
+        <input type="checkbox" name="sub" value="AI"> AI
+        <input type="checkbox" name="sub" value="ADWT"> ADWT
+        <input type="checkbox" name="sub" value="AOS"> AOS
+        <input type="checkbox" name="sub" value="PPL"> PPL
+        <input type="checkbox" name="sub" value="RM"> RM
+        <input type="checkbox" name="sub" value="FINANCE"> FINANCE
+        <input type="checkbox" name="sub" value="MARKETING"> MARKETING
+      </div>
+
+      <!-- Date -->
+      <label>Date of Birth:</label>
+      <input type="date" name="dob">
+
+      <!-- Phone -->
+      <label>Phone:</label>
+      <input type="text" name="countrycode" value="+91" size="2">
+
+      <label>Address:</label>
+      <input type="text" name="address" size="50">
+
+      <!-- Email -->
+      <label>Email Id:</label>
+      <input type="email" name="email">
+
+      <!-- Search -->
+      <label>Search:</label>
+      <input type="search" name="search">
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+</body>
+</html>
+
+slip 9_2
+
+Here are ten sample documents for the CustomerLoans collection.
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d1"),
+"customer_name": "David Smith",
+"loan_type": "Home",
+"loan_amount": 250000,
+"city": "Pimpri",
+"address": "123 Main St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d2"),
+"customer_name": "Daniel Brown",
+"loan_type": "Car",
+"loan_amount": 30000,
+"city": "Pimpri",
+"address": "456 Elm St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d3"),
+"customer_name": "Sarah Johnson",
+"loan_type": "Personal",
+"loan_amount": 50000,
+"city": "Pimpri",
+"address": "789 Oak St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d4"),
+"customer_name": "Michael Williams",
+"loan_type": "Home",
+"loan_amount": 150000,
+"city": "Pune",
+"address": "101 Pine St, Pune"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d5"),
+"customer_name": "Diana Wilson",
+"loan_type": "Car",
+"loan_amount": 20000,
+"city": "Pimpri",
+"address": "202 Maple St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d6"),
+"customer_name": "David Lee",
+"loan_type": "Personal",
+"loan_amount": 75000,
+"city": "Pune",
+"address": "303 Birch St, Pune"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d7"),
+"customer_name": "Emma Davis",
+"loan_type": "Home",
+"loan_amount": 200000,
+"city": "Pimpri",
+"address": "404 Cedar St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d8"),
+"customer_name": "Daniel Green",
+"loan_type": "Car",
+"loan_amount": 25000,
+"city": "Pimpri",
+"address": "505 Spruce St, Pimpri"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58d9"),
+"customer_name": "Derek White",
+"loan_type": "Personal",
+"loan_amount": 60000,
+"city": "Pune",
+"address": "606 Fir St, Pune"
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a58da"),
+"customer_name": "Diana Brown",
+"loan_type": "Home",
+"loan_amount": 180000,
+"city": "Pimpri",
+"address": "707 Willow St, Pimpri"
+}
+]
+
+3. Queries
+a. List all customers whose name starts with the character 'D'.
+db.CustomerLoans.find(
+{ customer_name: { $regex: /^D/ } },
+{ _id: 0, customer_name: 1 }
+)
+
+b. List the names of customers in descending order who have taken a loan from Pimpri city.
+db.CustomerLoans.find(
+{ city: "Pimpri" },
+{ _id: 0, customer_name: 1 }
+).sort({ customer_name: -1 })
+
+c. Display customer details having the maximum loan amount.
+db.CustomerLoans.find()
+.sort({ loan_amount: -1 })
+.limit(1)
+
+d. Update the address of the customer whose name is “Mr. Patil” and loan_amount is greater than 100000.
+db.CustomerLoans.updateOne(
+{ customer_name: "Mr. Patil", loan_amount: { $gt: 100000 } },
+{ $set: { address: "New Address, City" } }
+)

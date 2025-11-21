@@ -1,0 +1,129 @@
+Q 1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Progress Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .progress-container {
+      width: 80%;
+      max-width: 400px;
+      height: 30px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-top: 20px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #4caf50;
+      text-align: center;
+      color: white;
+      line-height: 30px;
+      font-weight: bold;
+      transition: width 0.5s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Download Progress</h2>
+  <button onclick="startDownload()">Start Download</button>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
+  </div>
+
+  <script>
+    function startDownload() {
+      let progress = 0;
+      const progressBar = document.getElementById("progressBar");
+
+      // Reset bar before each download
+      progressBar.style.width = "0%";
+      progressBar.textContent = "0%";
+
+      const interval = setInterval(() => {
+        progress += 5;
+        progressBar.style.width = progress + "%";
+        progressBar.textContent = progress + "%";
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressBar.textContent = "100%";
+          alert("Download completed!");
+        }
+      }, 1000); // increase by 5% every 1 second
+    }
+  </script>
+
+</body>
+</html>
+
+Q 2)
+
+ CREATE
+ (rose:Plant {name: "Rose", type: "Flowering", qty_sold: 550}),
+ (tulip:Plant {name: "Tulip", type: "Flowering", qty_sold: 300}),
+ (creeper:Plant {name: "Creeper", type: "Creeper", qty_sold: 600}),
+ (fertilizerA:Fertilizer {name: "Fertilizer A", type: "Organic"}),
+ (productA:Product {name: "Watering Can", type: "Tool"}),
+ (customer1:Customer {name: "John", visit_date: date("2023-09-15")}),
+ (customer2:Customer {name: "Sarah", visit_date: date("2023-09-16")}),
+ (supplier1:Supplier {name: "Green Nursery Supplies"}),
+ (supplier2:Supplier {name: "PlantPro"}),
+ // Relationships
+ (supplier1)-[:SUPPLIES]->(rose),
+ (supplier2)-[:SUPPLIES]->(creeper),
+ (customer1)-[:PURCHASED {date: date("2023-09-15")}]->(rose),
+ (customer2)-[:PURCHASED {date: date("2023-09-16")}]->(creeper),
+ (customer1)-[:RATED {rating: 5}]->(:App {name: "NurseryApp"}),
+ (customer2)-[:RECOMMENDED]->(:App {name: "NurseryApp"});
+
+ a. List the types of plants from your graph model
+ MATCH(p:Plant)
+ RETURNDISTINCT p.type;
+ b. List the popular flowering plants
+ MATCH(p:Plant {type: "Flowering"})
+ WHEREp.qty_sold > 400
+RETURNp.name, p.qty_sold;
+ c. List the names of plants sold where qty > 500 in the last 2 days
+ MATCH(p:Plant)<-[:PURCHASED]-(c:Customer)
+ WHEREp.qty_sold > 500 AND c.visit_date >= date()- duration({days: 2})
+ RETURNp.name, p.qty_sold;
+ d. List the names of suppliers in decreasing order who supply “Creepers”
+ MATCH(s:Supplier)-[:SUPPLIES]->(p:Plant {type: "Creeper"})
+ RETURNs.name ORDER BYp.qty_sold DESC;

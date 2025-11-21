@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Table Styling</title>
+  <style>
+    
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 15px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse; 
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;          
+      border-top: 1px solid #dee2e6;  
+      text-align: left;
+    }
+
+    .table thead th {
+      border-bottom: 2px solid #dee2e6;
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;  
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>User Information Table</h2>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rahul</td>
+        <td>Sharma</td>
+        <td>rahul.sharma@example.com</td>
+      </tr>
+      <tr>
+        <td>Priya</td>
+        <td>Patil</td>
+        <td>priya.patil@example.com</td>
+      </tr>
+      <tr>
+        <td>Neha</td>
+        <td>Deshmukh</td>
+        <td>neha.deshmukh@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+
+slip 4_2
+
+Here are ten sample documents for the Hospitals collection.
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c1"),
+"name": "Nashik General Hospital",
+"city": "Nashik",
+"specializations": ["Pediatric", "Orthopedic"],
+"rating": 4.5,
+"doctors": ["Dr. Deshmukh", "Dr. Patel"],
+"reviews": [
+{ "reviewer_name": "John Doe", "review_text": "Excellent service!" },
+{ "reviewer_name": "Jane Smith", "review_text": "Very professional staff." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c2"),
+"name": "Nashik Women’s Hospital",
+"city": "Nashik",
+"specializations": ["Gynaec"],
+"rating": 4.0,
+"doctors": ["Dr. Rao"],
+"reviews": [
+{ "reviewer_name": "Alice Johnson", "review_text": "Great care during my visit." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c3"),
+"name": "Nashik Orthopedic Center",
+"city": "Nashik",
+"specializations": ["Orthopedic"],
+"rating": 4.2,
+"doctors": ["Dr. Deshmukh", "Dr. Kumar"],
+"reviews": [
+{ "reviewer_name": "Bob Brown", "review_text": "Very knowledgeable doctors." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c4"),
+"name": "Central Hospital Nashik",
+"city": "Nashik",
+"specializations": ["Pediatric", "Gynaec", "Orthopedic"],
+"rating": 3.9,
+"doctors": ["Dr. Sharma"],
+"reviews": [
+{ "reviewer_name": "Emily Davis", "review_text": "Good hospital but waiting time is long." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c5"),
+"name": "Eastside Health Clinic",
+"city": "Nashik",
+"specializations": ["Pediatric"],
+"rating": 4.1,
+"doctors": ["Dr. Singh"],
+"reviews": [
+{ "reviewer_name": "Michael Wilson", "review_text": "Very caring staff." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c6"),
+"name": "West End Hospital",
+"city": "Pune",
+"specializations": ["Orthopedic"],
+"rating": 4.3,
+"doctors": ["Dr. Patel"],
+"reviews": [
+{ "reviewer_name": "Sophia Lee", "review_text": "Highly recommend this hospital." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c7"),
+"name": "Southside Medical Center",
+"city": "Nashik",
+"specializations": ["Gynaec"],
+"rating": 4.4,
+"doctors": ["Dr. Deshmukh", "Dr. Verma"],
+"reviews": [
+{ "reviewer_name": "Liam Martinez", "review_text": "Excellent facilities and services." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c8"),
+"name": "North Valley Clinic",
+"city": "Nashik",
+"specializations": ["Orthopedic"],
+"rating": 4.1,
+"doctors": ["Dr. Rao"],
+"reviews": [
+{ "reviewer_name": "Olivia Moore", "review_text": "Good experience overall." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c9"),
+"name": "Healthcare Hub",
+"city": "Nashik",
+"specializations": ["Pediatric", "Gynaec"],
+"rating": 4.0,
+"doctors": ["Dr. Kumar"],
+"reviews": [
+{ "reviewer_name": "James Anderson", "review_text": "Great pediatric care." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c10"),
+"name": "City Care Hospital",
+"city": "Nashik",
+"specializations": ["Orthopedic"],
+"rating": 3.8,
+"doctors": ["Dr. Deshmukh"],
+"reviews": [
+{ "reviewer_name": "Ava Jackson", "review_text": "Good service, but can improve." }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a55c11"),
+"name": "Nashik Medical Clinic",
+"city": "Nashik",
+"specializations": ["Pediatric"],
+"rating": 4.6,
+"doctors": ["Dr. Singh"],
+"reviews": [
+{ "reviewer_name": "Noah Harris", "review_text": "Outstanding care and support." }
+]
+}
+]
+
+3. Queries
+a. List the names of hospitals with a specific specialization (e.g., "Orthopedic").
+db.Hospitals.find(
+{ specializations: "Orthopedic" },
+{ _id: 0, name: 1 }
+)
+
+b. List the names of all hospitals located in a specific city (e.g., "Nashik").
+db.Hospitals.find(
+{ city: "Nashik" },
+{ _id: 0, name: 1 }
+)
+
+c. List the names of hospitals where Dr. Deshmukh visits.
+db.Hospitals.find(
+{ doctors: "Dr. Deshmukh" },
+{ _id: 0, name: 1 }
+)
+
+d. List the names of hospitals whose rating is greater than or equal to 4.
+db.Hospitals.find(
+{ rating: { $gte: 4 } },
+{ _id: 0, name: 1 }
+)

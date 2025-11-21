@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of Persons</title>
+  <style>
+    table {
+      width: 80%;
+      border: 2px solid black;
+      border-radius: 10px; /* rounded corners */
+      border-collapse: collapse;
+      margin: 20px auto;
+      text-align: center;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+    th {
+      background-color: #f8f9fa;
+    }
+    caption {
+      caption-side: top;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <caption>List of Persons</caption>
+    <tr>
+      <th>Srno</th>
+      <th>Person Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+
+</body>
+</html>
+
+
+slip5_2
+Here are five sample documents for the Projects collection.
+[
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a56c1"),
+"name": "Project Alpha",
+"type": "Development",
+"duration_months": 6,
+"employees": [
+{ "name": "Mr. Patil", "role": "Developer" },
+{ "name": "Ms. Sharma", "role": "Tester" }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a56c2"),
+"name": "Project Beta",
+"type": "Research",
+"duration_months": 4,
+"employees": [
+{ "name": "Mr. Deshmukh", "role": "Researcher" },
+{ "name": "Mr. Patil", "role": "Analyst" }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a56c3"),
+"name": "Project Gamma",
+"type": "Development",
+"duration_months": 2,
+"employees": [
+{ "name": "Ms. Singh", "role": "Developer" }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a56c4"),
+"name": "Project Delta",
+"type": "Marketing",
+"duration_months": 5,
+"employees": [
+{ "name": "Mr. Patil", "role": "Marketing Manager" },
+{ "name": "Ms. Rao", "role": "Marketing Specialist" }
+]
+},
+{
+"_id": ObjectId("64c9a1b1f6291e7d5c7a56c5"),
+"name": "Project Epsilon",
+"type": "Development",
+"duration_months": 3,
+"employees": [
+{ "name": "Ms. Sharma", "role": "Developer" },
+{ "name": "Mr. Kumar", "role": "Tester" }
+]
+}
+]
+
+a. List all names of projects where type is a specific value (e.g., "Development").
+db.Projects.find(
+{ type: "Development" },
+{ _id: 0, name: 1 }
+)
+
+b. List all the projects with a duration greater than 3 months.
+db.Projects.find(
+{ duration_months: { $gt: 3 } },
+{ _id: 0, name: 1 }
+)
+
+c. Count the number of employees working on a specific project (e.g., "Project Alpha").
+db.Projects.findOne(
+{ name: "Project Alpha" },
+{ _id: 0, employees: 1 }
+).employees.length
+
+d. List the names of projects on which Mr. Patil is working.
+db.Projects.find(
+{ "employees.name": "Mr. Patil" },
+{ _id: 0, name: 1 }
+)
+=================================
