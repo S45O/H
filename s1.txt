@@ -1,0 +1,27 @@
+a. Display area wise property details.
+db.Properties.aggregate([
+{
+$group: {
+_id: "$area",
+properties: { $push: { address: "$address", rate: "$rate", owner: "$owner" } }
+}
+}
+])
+
+b. Display property owned by 'Mr. Patil' having minimum rate.
+db.Properties.find(
+{ "owner.name": "Mr. Patil" },
+{ _id: 0, address: 1, rate: 1 }
+).sort({ rate: 1 }).limit(1)
+
+c. Give the details of owner whose property is at “Nashik”.
+db.Properties.find(
+{ area: "Nashik" },
+{ _id: 0, "owner.name": 1, "owner.contact": 1 }
+)
+
+d. Display area of property whose rate is less than 100000.
+db.Properties.find(
+{ rate: { $lt: 100000 } },
+{ _id: 0, area: 1 }
+)

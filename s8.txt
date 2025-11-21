@@ -1,0 +1,32 @@
+a. List all the items where quantity is greater than 300.
+db.Inventory.find(
+{ quantity: { $gt: 300 } },
+{ _id: 0, item_name: 1, quantity: 1 }
+)
+
+b. List all items which have tags less than 5.
+db.Inventory.find(
+{ "tags.4": { $exists: false } },
+{ _id: 0, item_name: 1, tags: 1 }
+)
+
+c. List all items having status equal to "B" or having quantity less than 50 and height of the product should be
+greater than 8.
+db.Inventory.find(
+{
+$or: [
+{ status: "B" },
+{ $and: [ { quantity: { $lt: 50 } }, { height: { $gt: 8 } } ] }
+]
+},
+{ _id: 0, item_name: 1, status: 1, quantity: 1, height: 1 }
+)
+
+d. Find all warehouses that keep item “Planner” and have stock quantity less than 20.
+db.Inventory.find(
+{
+item_name: "Planner",
+"warehouses.stock_quantity": { $lt: 20 }
+},
+{ _id: 0, "warehouses.$": 1 }
+)

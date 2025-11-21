@@ -1,0 +1,22 @@
+a. List all customers whose name starts with the character 'D'.
+db.CustomerLoans.find(
+{ customer_name: { $regex: /^D/ } },
+{ _id: 0, customer_name: 1 }
+)
+
+b. List the names of customers in descending order who have taken a loan from Pimpri city.
+db.CustomerLoans.find(
+{ city: "Pimpri" },
+{ _id: 0, customer_name: 1 }
+).sort({ customer_name: -1 })
+
+c. Display customer details having the maximum loan amount.
+db.CustomerLoans.find()
+.sort({ loan_amount: -1 })
+.limit(1)
+
+d. Update the address of the customer whose name is “Mr. Patil” and loan_amount is greater than 100000.
+db.CustomerLoans.updateOne(
+{ customer_name: "Mr. Patil", loan_amount: { $gt: 100000 } },
+{ $set: { address: "New Address, City" } }
+)

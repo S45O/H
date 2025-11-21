@@ -1,0 +1,27 @@
+a. Display the average number of students participating in each competition.
+db.Competitions.aggregate([
+{ $project: { competition_name: 1, student_count: { $size: "$students" } } },
+{ $group: {
+_id: null,
+average_students: { $avg: "$student_count" }
+}
+}
+])
+
+b. Find the number of students for the "Programming Contest".
+db.Competitions.find(
+{ competition_name: "Programming Contest" },
+{ _id: 0, student_count: { $size: "$students" } }
+)
+
+c. Display the names of the first three winners of each competition.
+db.Competitions.find(
+{},
+{ _id: 0, competition_name: 1, "students": { $slice: 3 } }
+)
+
+d. Display students from class 'FY' who participated in the 'E-Rangoli' competition.
+db.Competitions.find(
+{ competition_name: "E-Rangoli", "students.class": "FY" },
+{ _id: 0, "students.$": 1 }
+)

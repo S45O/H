@@ -1,0 +1,16 @@
+a. List the characteristics of four-wheeler types.
+ MATCH(fw:VehicleType {name: "Four-Wheeler"})
+ RETURNfw.characteristics;
+ b. List the names of customers who bought a two-wheeler vehicle.
+ MATCH(cust:Customer)-[:BUYS]->(tw:VehicleType {name: "Two-Wheeler"})
+ RETURNcust.name;
+ c. List the customers who bought more than one type of vehicle.
+ MATCH(cust:Customer)-[:BUYS]->(v:VehicleType)
+ WITH cust, COUNT(v) AS vehicleCount
+ WHEREvehicleCount > 1
+ RETURNcust.name;
+ d. List the most recommended vehicle type.
+ MATCH(cust:Customer)-[:RECOMMENDS]->(v:VehicleType)
+ RETURNv.name, COUNT(cust) AS recommendationCount
+ ORDERBYrecommendationCount DESC
+ LIMIT 1;

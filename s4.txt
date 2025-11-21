@@ -1,0 +1,23 @@
+a. List the names of hospitals with a specific specialization (e.g., "Orthopedic").
+db.Hospitals.find(
+{ specializations: "Orthopedic" },
+{ _id: 0, name: 1 }
+)
+
+b. List the names of all hospitals located in a specific city (e.g., "Nashik").
+db.Hospitals.find(
+{ city: "Nashik" },
+{ _id: 0, name: 1 }
+)
+
+c. List the names of hospitals where Dr. Deshmukh visits.
+db.Hospitals.find(
+{ doctors: "Dr. Deshmukh" },
+{ _id: 0, name: 1 }
+)
+
+d. List the names of hospitals whose rating is greater than or equal to 4.
+db.Hospitals.find(
+{ rating: { $gte: 4 } },
+{ _id: 0, name: 1 }
+)

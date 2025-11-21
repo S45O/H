@@ -1,0 +1,23 @@
+a. List all newspapers available in “NASHIK” city.
+db.Newspapers.find(
+{ city: "Nashik" },
+{ _id: 0, title: 1 }
+)
+
+b. List all the newspapers of “Marathi” language.
+db.Newspapers.find(
+{ language: "Marathi" },
+{ _id: 0, title: 1 }
+)
+
+c. Count the number of publishers from the “Gujarat” state.
+db.Newspapers.distinct(
+"publisher.name",
+{ "publisher.state": "Gujarat" }
+).length
+
+d. Write a cursor to show newspapers with the highest sale in Maharashtra State.
+db.Newspapers.find(
+{ "publisher.state": "Maharashtra" },
+{ _id: 0, title: 1, sales: 1 }
+).sort({ sales: -1 }).limit(1)

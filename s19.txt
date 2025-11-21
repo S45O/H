@@ -1,0 +1,14 @@
+a. List the characteristics of laptops.
+ MATCH(l:Laptop)
+ RETURNl.model, l.company, l.price, l.release_year;
+ b. List the names of customers who bought a "DELL" company laptop.
+ MATCH(c:Customer)-[:BOUGHT]->(l:Laptop {company: "Dell"})
+ RETURNc.name;
+ c. List the customers who purchased a device on "26/01/2023".
+ MATCH(c:Customer)-[:BOUGHT {purchase_date: "2023-01-26"}]->(l:Laptop)
+ RETURNc.name, l.model;
+ d. List the most recommended device.
+ MATCH(l:Laptop)<-[:RECOMMENDED]-(c:Customer)
+ RETURNl.model, count(c) AS recommendations
+ ORDERBYrecommendations DESC
+ LIMIT 1;

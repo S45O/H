@@ -1,0 +1,42 @@
+a. Display name of the employee who has the highest salary.
+db.Employees.find(
+{},
+{ _id: 0, name: 1, salary: 1 }
+).sort({ salary: -1 }).limit(1)
+
+b. Display the department with the maximum number of employees.
+db.Employees.aggregate([
+{
+$group: {
+_id: "$department.name",
+total_employees: { $sum: 1 }
+}
+},
+{
+$sort: { total_employees: -1 }
+},
+{
+$limit: 1
+}
+])
+
+c. Write a cursor which shows department-wise employee information.
+db.Employees.aggregate([
+{
+$group: {
+_id: "$department.name",
+employees: {
+$push: {
+name: "$name",
+salary: "$salary"
+}
+}
+}
+}
+])
+
+d. List all the employees who work in the Sales department and have a salary greater than 50000.
+db.Employees.find(
+{ "department.name": "Sales", salary: { $gt: 50000 } },
+{ _id: 0, name: 1, salary: 1 }
+)

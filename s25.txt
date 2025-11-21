@@ -1,0 +1,17 @@
+a. List the details of all the departments in the university.
+ MATCH(dept:Department)
+ RETURNdept;
+ b. List the names of the courses provided by the Physics department.
+ MATCH(physics:Department {name: "Physics"})-[:OFFERS]->(course:Course)
+ RETURNcourse.name;
+ c. List the most recommended course in the Geography department.
+ MATCH(geo:Department {name:
+ "Geography"})-[:OFFERS]->(course:Course)<-[:RECOMMENDS]-(person:Person)
+ RETURNcourse.name, COUNT(person) AS recommendationCount
+ ORDERBYrecommendationCount DESC
+ LIMIT 1;
+ d. List the names of common courses across Mathematics and Computer Science departments.
+ MATCH(math:Department {name:
+ "Mathematics"})-[:OFFERS]->(course:Course)<-[:OFFERS]-(comp:Department {name: "Computer
+ Science"})
+ RETURNcourse.name;

@@ -1,0 +1,25 @@
+a. List the details of customers who have taken the “Komal Jeevan” Policy.
+db.Policies.find(
+{ policy_name: "Komal Jeevan" }
+)
+
+b. Display the average premium amount.
+db.Policies.aggregate([
+{
+$group: {
+_id: null,
+average_premium: { $avg: "$premium_amount" }
+}
+}
+])
+
+c. Increase the premium amount by 5% for policy type “Monthly”.
+db.Policies.updateMany(
+{ policy_type: "Monthly" },
+{ $mul: { premium_amount: 1.05 } }
+)
+
+d. Count the number of customers who have taken a policy type “Half Yearly”.
+db.Policies.countDocuments(
+{ policy_type: "Half Yearly" }
+)

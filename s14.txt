@@ -1,0 +1,16 @@
+ a. List the names of scholarships for the OBC category:
+ MATCH(sch:Scholarship {category: "OBC"})
+ RETURNsch.name;
+ b. Count the number of students who benefited from scholarships in 2020-2021:
+ MATCH(s:Student)-[r:APPLIED_FOR]->(sch:Scholarship)
+ WHEREr.year IN [2020, 2021]
+ RETURNCOUNT(s) AS BenefitedStudents;
+ c. Update the income limit for the OBC Scholarship:
+ MATCH(sch:Scholarship {name: "OBC Scholarship"})
+ SET sch.income_limit = 350000
+ RETURNsch;
+ d. List the most popular scholarship (applied by the most students):
+ MATCH(s:Student)-[r:APPLIED_FOR]->(sch:Scholarship)
+ RETURNsch.name, COUNT(s) AS NumberOfApplicants
+ ORDERBYNumberOfApplicants DESC
+ LIMIT 1;

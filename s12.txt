@@ -1,0 +1,41 @@
+a. List the names of movies with the highest budget.
+db.Movies.find(
+{},
+{ _id: 0, movie_name: 1, budget: 1 }
+).sort({ budget: -1 }).limit(1)
+
+b. Display the details of producers who have produced more than one movie in a year.
+db.Movies.aggregate([
+{ $unwind: "$producers" },
+{ $group: {
+_id: { year: "$release_year", producer: "$producers" },
+movie_count: { $sum: 1 }
+}
+},
+{ $match: { movie_count: { $gt: 1 } } },
+{ $group: {
+_id: "$_id.producer",
+years: { $addToSet: "$_id.year" }
+}
+},
+{ $project: { _id: 0, producer: "$_id", years: 1 } }
+])
+
+c. List the names of actors who have acted in at least one movie in which ‘Akshay Kumar’ has
+acted.
+db.Movies.aggregate([
+{ $match: { "actors.actor_name": "Akshay Kumar" } },
+{ $unwind: "$actors" },
+{ $group: {
+_id: "$actors.actor_name"
+}
+},
+{ $project: { _id: 0, actor_name: "$_id" } }
+])
+
+d. List the names of movies produced by more than one producer.
+db.Movies.find(
+{ "producers.1": { $exists: true } },
+{ _id: 0, movie_name: 1 }
+)
+

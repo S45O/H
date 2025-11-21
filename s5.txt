@@ -1,0 +1,23 @@
+a. List all names of projects where type is a specific value (e.g., "Development").
+db.Projects.find(
+{ type: "Development" },
+{ _id: 0, name: 1 }
+)
+
+b. List all the projects with a duration greater than 3 months.
+db.Projects.find(
+{ duration_months: { $gt: 3 } },
+{ _id: 0, name: 1 }
+)
+
+c. Count the number of employees working on a specific project (e.g., "Project Alpha").
+db.Projects.findOne(
+{ name: "Project Alpha" },
+{ _id: 0, employees: 1 }
+).employees.length
+
+d. List the names of projects on which Mr. Patil is working.
+db.Projects.find(
+{ "employees.name": "Mr. Patil" },
+{ _id: 0, name: 1 }
+)

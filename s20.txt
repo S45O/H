@@ -1,0 +1,14 @@
+a. List the types of plants from your graph model
+ MATCH(p:Plant)
+ RETURNDISTINCT p.type;
+ b. List the popular flowering plants
+ MATCH(p:Plant {type: "Flowering"})
+ WHEREp.qty_sold > 400
+RETURNp.name, p.qty_sold;
+ c. List the names of plants sold where qty > 500 in the last 2 days
+ MATCH(p:Plant)<-[:PURCHASED]-(c:Customer)
+ WHEREp.qty_sold > 500 AND c.visit_date >= date()- duration({days: 2})
+ RETURNp.name, p.qty_sold;
+ d. List the names of suppliers in decreasing order who supply “Creepers”
+ MATCH(s:Supplier)-[:SUPPLIES]->(p:Plant {type: "Creeper"})
+ RETURNs.name ORDER BYp.qty_sold DESC;

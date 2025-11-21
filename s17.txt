@@ -1,0 +1,14 @@
+ a. List the names of authors who wrote "Comics".
+ MATCH(a:Author)-[:WROTE]->(b:Book {genre: "Comics"})
+ RETURNa.name;
+ b. Count the number of readers of books published by "Sage".
+ MATCH(p:Publisher {name: "Sage"})-[:PUBLISHED]->(b:Book)<-[:READ]-(r:Reader)
+ RETURNCOUNT(r) AS num_readers;
+ c. List all publishers whose name starts with "N".
+ MATCH(p:Publisher)
+ WHEREp.name STARTS WITH "N"
+ RETURNp.name;
+ d. List the names of people who have given a rating of 3 or higher for a book.
+ MATCH(r:Reader)-[rev:REVIEWED]->(b:Book)
+ WHERErev.rating >= 3
+ RETURNr.name;

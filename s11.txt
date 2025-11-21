@@ -1,0 +1,23 @@
+ a. List all products in the inventory.
+ db.Sales.find(
+ {},
+ { _id: 0, product_name: 1, product_id: 1 }
+)
+ —--------------------------------------------------------------------------------------------------------------------------
+b. List the details of orders with a value > 20000.
+ db.Sales.find(
+ { order_value: { $gt: 20000 } },
+ { _id: 0, order_id: 1, order_value: 1, customer_name: 1 }
+ )
+ —--------------------------------------------------------------------------------------------------------------------------
+c. List all the orders which have not been processed (invoice not generated).
+ db.Sales.find(
+ { invoice_id: null },
+ { _id: 0, order_id: 1, customer_name: 1, order_value: 1 }
+ )
+ —--------------------------------------------------------------------------------------------------------------------------
+d. List all the orders along with their invoice for “Mr. Rajiv”.
+ db.Sales.find(
+ { customer_name: "Mr. Rajiv" },
+ { _id: 0, order_id: 1, product_name: 1, order_value: 1, invoice_id: 1, invoice_date: 1 }
+ )

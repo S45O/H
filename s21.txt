@@ -1,0 +1,13 @@
+ a. List the names of different medicines considered in your graph
+ MATCH(m:Medicine)
+ RETURNm.name;
+ b. List the medicine that are highly used in Rajasthan
+ MATCH(p:Product)-[:USED_IN {usage_percentage: 90..}]->(rajasthan:State {name: "Rajasthan"})
+ RETURNp.name;
+ c. List the highly used tablet in Gujarat
+ MATCH(tablet:Product {name: "Tablet"})-[:USED_IN {usage_percentage: 90..}]->(gujarat:State {name:
+ "Gujarat"})
+ RETURNtablet.name;
+ d. List the medicine names manufacturing “Powder”
+ MATCH(m:Medicine)-[:MANUFACTURES]->(powder:Product {name: "Powder"})
+ RETURNm.name;
